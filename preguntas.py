@@ -232,32 +232,21 @@ def pregunta_07():
     ]
 
     """
-    datos6=[z.replace("\t",";") for z in datos]
-    datos6=[z.split(";") for z in datos6]
-    col6= [z[4] for z in datos6]
-    col6= [z.split(",") for z in col6]
-    mayor={}
-    menor={}
-    for palabras in col6:
-        for i in palabras:
-            if i[0:3] in mayor:
-                if mayor[i[0:3]]<int(i[4:]):
-                    mayor[i[0:3]]=int(i[4:])
-            else:
-                mayor[i[0:3]]=int(i[4:])
-        for i in palabras:
-            if i[0:3] in menor:
-                if menor[i[0:3]]>int(i[4:]):
-                    menor[i[0:3]]=int(i[4:])
-            else:
-                menor[i[0:3]]=int(i[4:])     
-    
-    lista = [(i,menor[i],mayor[i]) for i in mayor]
-
+    col1=[z[0] for z in datos] #letras col 1
+    col2=[int(z[2]) for z in datos] #numero col 2
+    zipped=list(zip(col1, col2)) #Col 1 + Col 2
+    d={}
+    for i in zipped:
+        if i[1] in d:
+            d[i[1]]+=i[0]
+            
+        else:
+            d[i[1]]=i[0]
+    lista = [(i,list(d[i])) for i in d]
     f=itemgetter(0)
     lista = sorted(lista,key=f)
-
     return lista
+
 
 
 def pregunta_08():
